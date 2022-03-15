@@ -70,6 +70,32 @@ case "$1" in
 			docker rmi mysql:latest wordpress:latest phpmyadmin:latest joomla:latest > /dev/null
 		fi
 		;;
+	'start')
+		if (( EUID == 0 ))
+		then
+			echo "Aquest opció no s'ha d'executar amb prilegis de l'usuari root"
+			exit 4
+		else
+			echo "Iniciant Dockers de MySQL-PHPMyAdmin-WordPress-Joomla per la pràctica  m05uf2pr2"
+			docker start m05uf2pr2_mysql
+			docker start m05uf2pr2_phpmyadmin
+			docker start m05uf2pr2_wordpress
+			docker start m05uf2pr2_joomla			
+		fi
+		;;
+	'stop')
+		if (( EUID == 0 ))
+		then
+			echo "Aquest opció no s'ha d'executar amb prilegis de l'usuari root"
+			exit 5
+		else
+			echo "Aturant Dockers de MySQL-PHPMyAdmin-WordPress-Joomla per la pràctica  m05uf2pr2"
+			docker stop m05uf2pr2_mysql
+			docker stop m05uf2pr2_phpmyadmin
+			docker stop m05uf2pr2_wordpress
+			docker stop m05uf2pr2_joomla			
+		fi
+		;;		
 	*)
 		clear
 		echo "COM UTILITZAR AQUEST SCRIPT:"
@@ -79,6 +105,10 @@ case "$1" in
 		echo "Descarregant imatges i creant docker de mysql-phpmyadmin-wordpress-joomla: ./m05uf2pr2.sh up"
 		echo " "
 		echo "Aturant i esborrant dockers i imatges de mysql-phpmyadmin-wordpress-joomla: ./m05uf2pr2.sh destroy"
+		echo " "
+		echo "Iniciant dockers de mysql-phpmyadmin-wordpress-joomla: ./m05uf2pr2.sh start"
+		echo " "
+		echo "Aturant dockers de mysql-phpmyadmin-wordpress-joomla: ./m05uf2pr2.sh stop"
 		echo " "
 		;;
 esac
