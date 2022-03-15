@@ -40,7 +40,7 @@ case "$1" in
 			docker pull mysql:latest
 			docker run --name m05uf2pr2_mysql -e MYSQL_ROOT_PASSWORD=FjeClot22@ -d -v voldb:$PWD/voldb -p 3306:3306 -p 33060:33060 mysql:latest
 			docker pull phpmyadmin:latest
-			docker run --name m05uf2pr2_phpmyadmin -d --link m05uf2pr2_mysql:mysql -p 8081:80 phpmyadmin
+			docker run --name m05uf2pr2_phpmyadmin -d --link m05uf2pr2_mysql:db -p 8081:80 phpmyadmin
 			docker pull wordpress:latest
 			docker run --name m05uf2pr2_wordpress -p 8080:80 -d wordpress
 			docker network create --attachable xarxa_m05uf2pr2
